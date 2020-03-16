@@ -1,0 +1,24 @@
+{
+  "name": "coronavirus",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "next"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "d3-scale": "^3.2.1",
+    "moment": "^2.24.0",
+    "moments": "0.0.2",
+    "next": "^9.3.0",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0",
+    "react-simple-maps": "^1.0.0-beta.0",
+    "styled-components": "^5.0.1"
+  },
+  "devDependencies": {
+    "prettier": "^1.19.1"
+  }
+}
