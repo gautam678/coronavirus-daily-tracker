@@ -2,11 +2,31 @@ import { ComposableMap, Geographies, Geography } from "react-simple-maps";
 import useMetrics from "../utils/useMetrics";
 const geoUrl = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json";
 import moment from "moment";
+import { StateInitialToFull } from "../shared/constants";
+import { capitalize } from "../utils/usefulFunctions";
 import { scaleQuantile } from "d3-scale";
-const MapChart = () => {
+const MapChart = ({ date }) => {
+  const parseStates = (results, geo) => {
+    const cur = results.find(s => {
+      if (
+        s.provinceState.match(",") &&
+        !s.provinceState.match("U.S.") &&
+        !s.provinceState.match("Diamond Princess")
+      ) {
+        return (
+          capitalize(
+            StateInitialToFull[s.provinceState.split(",")[1].trimStart()]
+          ) === geo.properties.name
+        );
+      } else {
+        return s.provinceState === geo.properties.name;
+      }
+    });
+    return cur;
+  };
   const { results, loading, error } = useMetrics(
-    moment().format("M-DD-YYYY"),
-    moment()
+    date,
+    moment(date)
       .subtract(1, "days")
       .format("M-DD-YYYY")
   );
@@ -31,9 +51,7 @@ const MapChart = () => {
       <Geographies geography={geoUrl}>
         {({ geographies }) =>
           geographies.map(geo => {
-            const cur = results.find(
-              s => s.provinceState === geo.properties.name
-            );
+            const cur = parseStates(results, geo);
             return (
               <Geography
                 key={geo.rsmKey}
