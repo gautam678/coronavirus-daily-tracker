@@ -8,16 +8,19 @@ import { scaleQuantile } from "d3-scale";
 const MapChart = ({ date }) => {
   const parseStates = (results, geo) => {
     const cur = results.find(s => {
-      if (
-        s.provinceState.match(",") &&
-        !s.provinceState.match("U.S.") &&
-        !s.provinceState.match("Diamond Princess")
-      ) {
-        return (
-          capitalize(
-            StateInitialToFull[s.provinceState.split(",")[1].trimStart()]
-          ) === geo.properties.name
-        );
+      if (s.provinceState.match(",")) {
+        if (
+          s.provinceState.match("U.S.") ||
+          s.provinceState.match("Princess")
+        ) {
+          return false;
+        } else {
+          return (
+            capitalize(
+              StateInitialToFull[s.provinceState.split(",")[1].trimStart()]
+            ) === geo.properties.name
+          );
+        }
       } else {
         return s.provinceState === geo.properties.name;
       }
