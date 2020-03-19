@@ -24,7 +24,7 @@ export default function IndexPage() {
       locale={"en"}
     >
       <GlobalStyle />
-      <h1>{`Coronavirus Daily Tracker`}</h1>
+      <h1>{`COVID-19 Daily Tracker`}</h1>
       <div
         style={{ display: "flex", flexDirection: "row", alignItems: "center" }}
       >
