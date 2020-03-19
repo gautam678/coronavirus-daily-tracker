@@ -15,12 +15,20 @@ export default function DailyTracker({ date }) {
   if (error) return <p> Error..</p>;
   return (
     <div style={{ display: "flex", flexDirection: "row" }}>
-      <div style={{ width: 750, height: 750 }}>
-        <MapChart results={results} />
-      </div>
-      <div style={{ maxHeight: 750, overflowY: "scroll", overflowX: "hidden" }}>
-        <Stats states={results} />
-      </div>
+      {results.length > 0 ? (
+        <>
+          <div style={{ width: 750, height: 750 }}>
+            <MapChart results={results} />
+          </div>
+          <div
+            style={{ maxHeight: 750, overflowY: "scroll", overflowX: "hidden" }}
+          >
+            <Stats states={results} />
+          </div>
+        </>
+      ) : (
+        <h2>The data for this date is not Available. Choose another date.</h2>
+      )}
     </div>
   );
 }
