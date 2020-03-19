@@ -1,4 +1,3 @@
-import Stats from "../components/Stats";
 import CountrySelector from "../components/CountrySelector";
 import { createGlobalStyle } from "styled-components";
 import DailyTracker from "../components/DailyTracker";
@@ -6,6 +5,8 @@ import { MuiPickersUtilsProvider, DatePicker } from "@material-ui/pickers";
 import MomentUtils from "@date-io/moment";
 import moment from "moment";
 import { useState } from "react";
+
+moment.locale("en");
 
 const GlobalStyle = createGlobalStyle`
 html{
@@ -15,8 +16,13 @@ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubun
 
 export default function IndexPage() {
   const [date, setDate] = useState(moment().format("M-DD-YYYY"));
+
   return (
-    <MuiPickersUtilsProvider utils={MomentUtils}>
+    <MuiPickersUtilsProvider
+      libInstance={moment}
+      utils={MomentUtils}
+      locale={"en"}
+    >
       <GlobalStyle />
       <h1>{`Coronavirus Daily Tracker`}</h1>
       <div
@@ -28,8 +34,6 @@ export default function IndexPage() {
         </div>
       </div>
       <DailyTracker date={date} />
-      {/* <Stats url="https://covid19.mathdro.id/api"></Stats>
-      <CountrySelector /> */}
     </MuiPickersUtilsProvider>
   );
 }
