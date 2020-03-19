@@ -20,6 +20,15 @@ const Content = styled.div`
   align-items: center;
 `;
 
+const Container = styled.div`
+  @media (max-width: 768px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+`;
+
 export default function IndexPage() {
   const [date, setDate] = useState(moment().format("M-DD-YYYY"));
 
@@ -30,7 +39,7 @@ export default function IndexPage() {
       locale={"en"}
     >
       <GlobalStyle />
-      <div>
+      <Container>
         <h1>{`COVID-19 Daily Tracker`}</h1>
         <Content>
           <h3> Number of cases on: </h3>
@@ -38,7 +47,7 @@ export default function IndexPage() {
             <DatePicker value={date} onChange={setDate} />
           </div>
         </Content>
-      </div>
+      </Container>
       <DailyTracker date={date} />
     </MuiPickersUtilsProvider>
   );
