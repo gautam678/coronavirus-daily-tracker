@@ -5,7 +5,7 @@ import moment from "moment";
 import { StateInitialToFull } from "../shared/constants";
 import { capitalize } from "../utils/usefulFunctions";
 import { scaleQuantile } from "d3-scale";
-const MapChart = ({ date }) => {
+const MapChart = ({ results }) => {
   const parseStates = (results, geo) => {
     const cur = results.find(s => {
       if (s.provinceState.match(",")) {
@@ -27,15 +27,6 @@ const MapChart = ({ date }) => {
     });
     return cur;
   };
-  const { results, loading, error } = useMetrics(
-    date,
-    moment(date)
-      .subtract(1, "days")
-      .format("M-DD-YYYY")
-  );
-  console.log(results);
-  if (!results) return <p> Loading...</p>;
-  if (error) return <p> Error..</p>;
   const colorScale = scaleQuantile()
     .domain(results.map(d => d.dailyConfirmed))
     .range([
