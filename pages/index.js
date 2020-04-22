@@ -21,7 +21,7 @@ const Content = styled.div`
 `;
 
 const Container = styled.div`
-  @media (max-width: 768px) {
+  @media (max-width: 412px) {
     display: flex;
     justify-content: center;
     align-items: center;
